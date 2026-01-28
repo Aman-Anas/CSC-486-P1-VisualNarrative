@@ -1,27 +1,45 @@
 [gd_scene load_steps=3 format=3 uid="uid://66g6xxllbjow"]
 
 [ext_resource type="PackedScene" uid="uid://bvxrfon87fmf2" path="res://Scenes/Dialogue/test_ink_dialogue.tscn" id="1_b5b44"]
-[ext_resource type="Texture2D" uid="uid://dvnscy28wd7v1" path="res://addons/kenney_prototype_textures/purple/texture_09.png" id="1_i6x60"]
+[ext_resource type="Texture2D" uid="uid://b6ypttt14sw7v" path="res://addons/kenney_prototype_textures/dark/texture_08.png" id="1_i6x60"]
 
-[node name="MainDialogueViewer" type="MarginContainer"]
+[node name="ColorRect" type="ColorRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="MainDialogueViewer" type="MarginContainer" parent="."]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainDialogueViewer"]
 layout_mode = 2
+theme_override_constants/separation = 11
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="MainDialogueViewer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("1_i6x60")
 expand_mode = 4
 stretch_mode = 6
 
-[node name="TestInkDialogue" parent="HBoxContainer" instance=ExtResource("1_b5b44")]
+[node name="MarginContainer" type="MarginContainer" parent="MainDialogueViewer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="TestInkDialogue" parent="MainDialogueViewer/HBoxContainer/MarginContainer" instance=ExtResource("1_b5b44")]
 layout_mode = 2
 size_flags_horizontal = 3

@@ -23,6 +23,10 @@ DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
 runtime/balloon_path="res://TestBalloon/Balloon.tscn"
 runtime/advanced/uses_dotnet=true
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [dotnet]
 
 project/assembly_name="Visual Narrative"

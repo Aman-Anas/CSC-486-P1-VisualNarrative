@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Godot;
@@ -18,22 +19,31 @@ public partial class TestInkDialogue : VBoxContainer
         UpdateStory();
     }
 
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override void _Process(double delta) { }
+    readonly List<Tween> currentTweens = [];
+    readonly List<Button> currentButtons = [];
 
     private async void UpdateStory()
     {
+        foreach (var tween in currentTweens)
+        {
+            tween.Kill();
+        }
+        currentTweens.Clear();
+        currentButtons.Clear();
+
         // Clear the existing text and content.
         foreach (Node child in GetChildren())
             child.QueueFree();
 
-        // How long to take to reveal each line (in ms)
-        const int RevealLineDelay = 500;
+        const int OptionRevealDelay = 500;
+
+        // How long to take to reveal each char (in ms)
+        const int CharRevealTime = 40; // ms
 
         // Reveal each line of the story piece-by-piece
         while (story.CanContinue)
         {
-            var nextText = story.Continue();
+            var nextText = story.Continue().TrimEnd('\n');
 
             if (story.CurrentTags.Contains("RESTART"))
             {
@@ -48,7 +58,7 @@ public partial class TestInkDialogue : VBoxContainer
                 AddChild(empty);
             }
 
-            Label content = new() { Text = nextText.TrimEnd('\n') };
+            Label content = new() { Text = nextText };
             AddChild(content);
 
             // Create a tween animation to fade in the text
@@ -57,10 +67,23 @@ public partial class TestInkDialogue : VBoxContainer
                 Callable.From((Color tweened) => content.Modulate = tweened),
                 new Color(1, 1, 1, 0.0f),
                 new Color(1.0f, 1.0f, 1.0f, 1.0f),
-                RevealLineDelay / 1000.0f
+                OptionRevealDelay / 1000.0f
             );
 
-            await GDTask.Delay(RevealLineDelay);
+            // Typewriter time
+            var typewriteTime = CharRevealTime * nextText.Length;
+            testFade
+                .Parallel()
+                .TweenMethod(
+                    Callable.From((float amt) => content.VisibleRatio = amt),
+                    0f,
+                    1f,
+                    typewriteTime / 1000f
+                );
+
+            currentTweens.Add(testFade);
+
+            await GDTask.Delay(Math.Max(OptionRevealDelay, typewriteTime));
         }
 
         // Delay between revealing all text and displaying the options
@@ -70,23 +93,33 @@ public partial class TestInkDialogue : VBoxContainer
         foreach (InkChoice choice in story.CurrentChoices)
         {
             Button button = new() { Text = choice.Text };
+
             button.Pressed += () =>
             {
                 story.ChooseChoiceIndex(choice.Index);
                 UpdateStory();
             };
+            button.Disabled = true;
+
             AddChild(button);
+            currentButtons.Add(button);
 
             var fadeButton = GetTree().CreateTween();
             fadeButton.TweenMethod(
                 Callable.From((Color tweened) => button.Modulate = tweened),
                 new Color(0, 0, 0, 0.0f),
                 new Color(1.0f, 1.0f, 1.0f, 1.0f),
-                RevealLineDelay / 1000.0f
+                OptionRevealDelay / 1000.0f
             );
+            currentTweens.Add(fadeButton);
 
             // Delay between revealing each choice
-            await GDTask.Delay(RevealLineDelay);
+            await GDTask.Delay(OptionRevealDelay);
+        }
+
+        foreach (var button in currentButtons)
+        {
+            button.Disabled = false;
         }
     }
 }
