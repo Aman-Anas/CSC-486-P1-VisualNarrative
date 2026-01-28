@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bvxrfon87fmf2"]
+
+[ext_resource type="Script" uid="uid://7570n0bgk2ne" path="res://Game/Dialogue/TestInkDialogue.cs" id="1_wqdps"]
+[ext_resource type="Resource" uid="uid://2fc1s4nf8s82" path="res://Scenes/Dialogue/test_ink.ink" id="2_ooklt"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ooklt"]
+
+[node name="TestInkDialogue" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wqdps")
+story = ExtResource("2_ooklt")
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 2
+text = "This will be replaced with story text."
+label_settings = SubResource("LabelSettings_ooklt")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+text = "Example option"
