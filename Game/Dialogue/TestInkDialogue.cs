@@ -35,7 +35,7 @@ public partial class TestInkDialogue : VBoxContainer
         foreach (Node child in GetChildren())
             child.QueueFree();
 
-        const int OptionRevealDelay = 500;
+        const int LineRevealTime = 500;
 
         // How long to take to reveal each char (in ms)
         const int CharRevealTime = 40; // ms
@@ -67,7 +67,7 @@ public partial class TestInkDialogue : VBoxContainer
                 Callable.From((Color tweened) => content.Modulate = tweened),
                 new Color(1, 1, 1, 0.0f),
                 new Color(1.0f, 1.0f, 1.0f, 1.0f),
-                OptionRevealDelay / 1000.0f
+                LineRevealTime / 1000.0f
             );
 
             // Typewriter time
@@ -83,7 +83,7 @@ public partial class TestInkDialogue : VBoxContainer
 
             currentTweens.Add(testFade);
 
-            await GDTask.Delay(Math.Max(OptionRevealDelay, typewriteTime));
+            await GDTask.Delay(Math.Max(LineRevealTime, typewriteTime));
         }
 
         // Delay between revealing all text and displaying the options
@@ -109,12 +109,12 @@ public partial class TestInkDialogue : VBoxContainer
                 Callable.From((Color tweened) => button.Modulate = tweened),
                 new Color(0, 0, 0, 0.0f),
                 new Color(1.0f, 1.0f, 1.0f, 1.0f),
-                OptionRevealDelay / 1000.0f
+                LineRevealTime / 1000.0f
             );
             currentTweens.Add(fadeButton);
 
             // Delay between revealing each choice
-            await GDTask.Delay(OptionRevealDelay);
+            await GDTask.Delay(LineRevealTime);
         }
 
         foreach (var button in currentButtons)
