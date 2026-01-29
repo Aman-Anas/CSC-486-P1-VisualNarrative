@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Godot;
 using GodotInk;
@@ -13,14 +14,30 @@ public partial class TestInkDialogue : VBoxContainer
     [Export]
     private InkStory story;
 
+    [Export]
+    private Button fastForward = null!;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         UpdateStory();
+
+        fastForward.Pressed += () =>
+        {
+            foreach (var tween in currentTweens)
+            {
+                tween.CustomStep(9999999);
+            }
+            foreach (var token in cancellationTokens)
+            {
+                token.Cancel();
+            }
+        };
     }
 
     readonly List<Tween> currentTweens = [];
     readonly List<Button> currentButtons = [];
+    readonly List<CancellationTokenSource> cancellationTokens = [];
 
     private async void UpdateStory()
     {
@@ -30,6 +47,7 @@ public partial class TestInkDialogue : VBoxContainer
         }
         currentTweens.Clear();
         currentButtons.Clear();
+        cancellationTokens.Clear();
 
         // Clear the existing text and content.
         foreach (Node child in GetChildren())
@@ -38,7 +56,7 @@ public partial class TestInkDialogue : VBoxContainer
         const int LineRevealTime = 500;
 
         // How long to take to reveal each char (in ms)
-        const int CharRevealTime = 30; // ms
+        const int CharRevealTime = 20; // ms
 
         // Reveal each line of the story piece-by-piece
         while (story.CanContinue)
@@ -85,7 +103,16 @@ public partial class TestInkDialogue : VBoxContainer
 
             currentTweens.Add(testFade);
 
-            await GDTask.Delay(Math.Max(LineRevealTime, typewriteTime));
+            CancellationTokenSource tokenSource = new();
+            cancellationTokens.Add(tokenSource);
+            try
+            {
+                await GDTask.Delay(
+                    Math.Max(LineRevealTime, typewriteTime),
+                    cancellationToken: tokenSource.Token
+                );
+            }
+            catch (OperationCanceledException) { }
         }
         Label spacer = new Label();
         AddChild(spacer);
@@ -118,9 +145,6 @@ public partial class TestInkDialogue : VBoxContainer
                 LineRevealTime / 1000.0f
             );
             currentTweens.Add(fadeButton);
-
-            // Delay between revealing each choice
-            await GDTask.Delay(LineRevealTime);
         }
 
         foreach (var button in currentButtons)
