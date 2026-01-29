@@ -38,7 +38,7 @@ public partial class TestInkDialogue : VBoxContainer
         const int LineRevealTime = 500;
 
         // How long to take to reveal each char (in ms)
-        const int CharRevealTime = 40; // ms
+        const int CharRevealTime = 30; // ms
 
         // Reveal each line of the story piece-by-piece
         while (story.CanContinue)
@@ -58,8 +58,10 @@ public partial class TestInkDialogue : VBoxContainer
                 AddChild(empty);
             }
 
-            Label content = new() { Text = nextText };
+            Label content =
+                new() { Text = nextText, AutowrapMode = TextServer.AutowrapMode.WordSmart };
             AddChild(content);
+            content.AddThemeFontSizeOverride("font_size", 20);
 
             // Create a tween animation to fade in the text
             var testFade = GetTree().CreateTween();
@@ -85,6 +87,8 @@ public partial class TestInkDialogue : VBoxContainer
 
             await GDTask.Delay(Math.Max(LineRevealTime, typewriteTime));
         }
+        Label spacer = new Label();
+        AddChild(spacer);
 
         // Delay between revealing all text and displaying the options
         await GDTask.Delay(50); // ms
@@ -100,6 +104,8 @@ public partial class TestInkDialogue : VBoxContainer
                 UpdateStory();
             };
             button.Disabled = true;
+
+            button.AddThemeFontSizeOverride("font_size", 20);
 
             AddChild(button);
             currentButtons.Add(button);

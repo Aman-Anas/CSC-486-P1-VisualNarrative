@@ -40,6 +40,9 @@ size_flags_horizontal = 3
 theme_override_constants/margin_top = 12
 theme_override_constants/margin_bottom = 12
 
-[node name="TestInkDialogue" parent="MainDialogueViewer/HBoxContainer/MarginContainer" unique_id=1295431285 instance=ExtResource("1_b5b44")]
+[node name="ScrollContainer" type="ScrollContainer" parent="MainDialogueViewer/HBoxContainer/MarginContainer" unique_id=543801680]
+layout_mode = 2
+
+[node name="TestInkDialogue" parent="MainDialogueViewer/HBoxContainer/MarginContainer/ScrollContainer" unique_id=1295431285 instance=ExtResource("1_b5b44")]
 layout_mode = 2
 size_flags_horizontal = 3
