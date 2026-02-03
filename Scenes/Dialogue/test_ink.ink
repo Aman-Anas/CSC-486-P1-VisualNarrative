@@ -78,22 +78,23 @@ Hitting the "open" button doesn't seem to do anything. The doors don't have any 
 
 { 
  - with_guard == true:
-    + Throw the guard at the door
-    Guard Bob: What?!? Come here ya little...
+    + [Throw the guard at the door] You pick up Bob and yeet him towards the door, hoping to pry it open somehow.
+    Bob: "What?!? Come here ya little..."
     Bob is enraged and beats you to death with his baton, before throwing you out an airlock.
     You died... Restart?
       -> prompt_restart
 
  }
 
-+ Look for a crowbar
++ [Look for a crowbar]
  -> look_for_crowbar
 
 { 
  - back_from_key_search == true && with_guard == true:
-    + Eat the guard and open the door
-     ~ate_the_guard = true
-     -> obtain_escape_pod
+    + [Eat the guard for energy] You devour the guard and gain enough energy to pry open the door.
+     ~with_guard = false
+	~ate_food = true
+     -> open_bay_doors
 
  }
 
@@ -102,10 +103,12 @@ While looking for something to wedge open the door, you come across the prison b
 
 You notice one of the prisoners inside holding a crowbar and prying open the cell door. They're about to escape when they notice you.
 
+~back_from_key_search = true
+
 {
  - with_guard == true:
 The prisoner notices Bob standing next to you.  
-"Crowbar's mine! Get outta you filthy copper!"
+"Crowbar's mine! Get outta here, you filthy coppah!"
     + [Return to the hangar bay]
       -> open_bay_doors
 
@@ -160,7 +163,7 @@ There's only a few functional escape pods left. You enter, and the systems initi
 You buckle in the pilot seat and slam the eject button.
 {
  - (with_guard == false && with_prisoner == false):
-  Wait, how do i steer?!? AHHHHHHHHHHHHHHHHHHHHH!
+  Wait, how do I steer?!? AHHHHHHHHHHHHHHHHHHHHH!
   + A pathetic death, even for a criminal... Try again? 
    -> prompt_restart
 
@@ -171,7 +174,7 @@ Bob grabs the wheel and carefully pilots the pod towards the planet.
 # EMPTY_LINE
   What goes around comes around, maybe you aren't such a bad guy after all…
   To be continued...
--> END
+-> prompt_restart
 
  - with_prisoner == true:
   Prisoner: *chuckles* Now that I'm free... did you know? Those 'enhancements' I gave you were a little.. modified.
@@ -188,5 +191,3 @@ Birds of a feather flock together... Try again?
 == prompt_restart ==
 + [Restart?] Restarting... # RESTART
 -> END
-
-

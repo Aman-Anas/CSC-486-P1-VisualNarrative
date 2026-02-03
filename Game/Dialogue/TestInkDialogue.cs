@@ -12,7 +12,7 @@ namespace Game.Dialogue;
 public partial class TestInkDialogue : VBoxContainer
 {
     [Export]
-    private InkStory story;
+    private InkStory story = null!;
 
     [Export]
     private Button fastForward = null!;

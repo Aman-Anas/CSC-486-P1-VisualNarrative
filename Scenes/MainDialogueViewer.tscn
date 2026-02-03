@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bvxrfon87fmf2" path="res://Scenes/Dialogue/test_ink_dialogue.tscn" id="1_b5b44"]
 [ext_resource type="Texture2D" uid="uid://b6ypttt14sw7v" path="res://addons/kenney_prototype_textures/dark/texture_08.png" id="1_i6x60"]
+[ext_resource type="PackedScene" uid="uid://be68kkhnkgb6u" path="res://Scenes/Pause_Menu/Pause.tscn" id="3_8yqo2"]
 
 [node name="ColorRect" type="ColorRect" unique_id=1025871647]
 anchors_preset = 15
@@ -63,3 +64,6 @@ grow_horizontal = 0
 grow_vertical = 0
 size_flags_horizontal = 8
 text = ">>"
+
+[node name="Pause" parent="." unique_id=55944826 instance=ExtResource("3_8yqo2")]
+layout_mode = 1
