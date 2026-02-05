@@ -56,7 +56,7 @@ public partial class TestInkDialogue : VBoxContainer
         const int LineRevealTime = 500;
 
         // How long to take to reveal each char (in ms)
-        const int CharRevealTime = 20; // ms
+        const int CharRevealTime = 0; // ms
 
         // Reveal each line of the story piece-by-piece
         while (story.CanContinue)

@@ -61,7 +61,7 @@ What do you do?
  -> open_bay_doors
 
 == open_bay_doors ==
-\-\-\-
+\.\.\.\.\.\.\.\.\.\.
 You make it to the hangar bay doors. The doors are six meters tall and would normally be powered by an internal mechanism.
 
 Hitting the "open" button doesn't seem to do anything. The doors don't have any power. 
@@ -129,9 +129,9 @@ The prisoner notices Bob standing next to you.
 You finally enter the hangar bay. Parts of the ceiling are breaking apart, and several shuttles have been crushed by falling debris. Most of the remaining shuttles seem to have already been taken.
 
 You notice one seemingly intact shuttle near the exit doors of the hangar bay and rush towards it, carefully avoiding the debris.
-\-\-\-
+# EMPTY_LINE
 You suddenly hear something fly through the open hangar doors and crash into the shuttle. It's a dropship!
-\-\-\-
+# EMPTY_LINE
 You are being jumped by a burger brigade! Ducking behind some crates to avoid the barrage of machine gun cheese, you evaluate your options.
 
 # EMPTY_LINE
