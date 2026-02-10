@@ -17,6 +17,12 @@ public partial class TestInkDialogue : VBoxContainer
     [Export]
     private Button fastForward = null!;
 
+    [Export]
+    private TextureRect imageViewer = null!;
+
+    [Export]
+    private Texture2D[] imageList = null!;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -33,6 +39,16 @@ public partial class TestInkDialogue : VBoxContainer
                 token.Cancel();
             }
         };
+    }
+
+    void SwitchToImage(int index)
+    {
+        if (index < 0 || index >= imageList.Length)
+        {
+            return;
+        }
+
+        imageViewer.Texture = imageList[index];
     }
 
     readonly List<Tween> currentTweens = [];
@@ -67,7 +83,17 @@ public partial class TestInkDialogue : VBoxContainer
             {
                 story.ResetState();
                 UpdateStory();
+                SwitchToImage(0);
                 return;
+            }
+
+            foreach (var tag in story.CurrentTags)
+            {
+                if (tag.Contains("IMAGE_"))
+                {
+                    int index = int.Parse(tag.TrimPrefix("IMAGE_").TrimPrefix(" IMAGE_"));
+                    SwitchToImage(index);
+                }
             }
 
             if (story.CurrentTags.Contains("EMPTY_LINE"))

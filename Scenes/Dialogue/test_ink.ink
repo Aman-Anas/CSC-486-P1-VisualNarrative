@@ -8,7 +8,7 @@ VAR ate_the_guard = false
 VAR num_evil_choices = 0
 
 Would you like to skip the introduction?
-
+# IMAGE_0
 + [Yes]
   -> begin
 + [No]
@@ -17,6 +17,7 @@ Would you like to skip the introduction?
 == exposition ==
 = expo_1
 You used to be someone important, or at least you told yourself that. You didn't think you were cruel, you just believed rules were for people who needed them. Other people waited in lines. Other people paid the price when things went wrong.
+# IMAGE_0
 # EMPTY_LINE
 When the Burger Consortium expanded into your sector, you didn’t see them as invaders, you saw an opportunity. You made contracts and cut corners. Some raised complaints, but they were silenced with money or a well-timed disappearance. You reassured yourself it was just business. No one was really getting hurt. But someone did get hurt. A lot of someones, you think.
 
@@ -25,6 +26,7 @@ When the Burger Consortium expanded into your sector, you didn’t see them as i
 
 = expo_2
 You don't remember the trial. Just your sentence: space prison. It sounded absurd at the time. You laughed, all the way up until the cuffs locked and the stars started moving the wrong way.
+# IMAGE_0
 # EMPTY_LINE
 Now, you're here. Stripped of your comfort and status, you are reduced to a body with needs: hunger, fear, and survival. But somewhere deep inside, beneath the outrage and denial, something is stirring. A thought you don’t like: "If this is who you really are... why pretend otherwise?"
 
@@ -35,6 +37,7 @@ Now, you're here. Stripped of your comfort and status, you are reduced to a body
 == begin ==
 = begin_1
 You wake up in a cramped prison cell, the kind designed for corpses, not people. Your head is pounding. Not in a dramatic way, more like the dull ache of a bad decision from a previous you refuse to replay. You remember your name. You remember signing... contracts. You remember being important.
+# IMAGE_1
 + [...]
  -> begin.begin_2
 = begin_2
@@ -43,10 +46,12 @@ You don't remember doing anything that deserves treament like this. Bright light
  -> begin.begin_3
 
 = begin_3
+# IMAGE_1
 You try to reconstruct the last few hours. A corporate boardroom? People yelling... someone saying, "We can make this work." Then movement. Restraints. Stars sliding sideways across a narrow porthole. After that, nothing you’re willing to claim.
 + [...]
  -> begin.begin_4
 = begin_4
+# IMAGE_1
 An alien... guard waddles past your cell, carrying a tray of green slime. They stop and slide it through the slot in your cell door, vaguely gesturing toward it before moving on to the next cell.
 # EMPTY_LINE
 The slime quivers a bit. You're not sure if you trust it. This is prison food, sustenance stripped of all dignity. You'd much prefer a gourmet meal by the Lamb Sauce Oracle.
@@ -63,6 +68,7 @@ You feel a familiar irritation rise up, one that strikes offense, as if the univ
 
 == stay_or_leave ==
 Suddenly, the lights flicker in the cell. The entire building shakes several times, and then the lights turn off. The light on the door locks fade away, you might be able to force the door open now.
+# IMAGE_1
 # EMPTY_LINE
 Do you stay in the cell block?
 
@@ -71,17 +77,23 @@ All the oxygen leaves the room and you suffocate.
 You died.
  -> prompt_restart
 + [Break out] You break out of the cell block! You hear a hissing sound, but find an oxygen mask on the wall and put it on.
+ -> break_out_cell
+
+== break_out_cell ==
+# IMAGE_2
+You enter the main hallway of the prison station. 
+You look out the window. It looks like you're on a space station! Orbiting the planet... uh, you're not sure what this planet is called. The only way out of here is to get on a shuttle. You think you can find one in the hangar bay.
++ [Continue Exploring] You continue exploring.
  -> go_to_hangar
 
 == go_to_hangar ==
-You look out the window. It looks like you're on a space station! Orbiting the planet... uh, you're not sure what this planet is called. The only way out of here is to get on a shuttle. You think you can find one in the hangar bay.
-
+# EMPTY_LINE
+# IMAGE_3
 Following the signs mounted on the wall, you make your way to the hangar. You hear screaming from a corridor to the left. Glancing that way, you notice a guard with his leg stuck in a door.
 
 What do you do?
 
 + [Help the guard] You begin helping the guard.
-
  -> evil_whisper
 + [Knock him out and take his gun] You kick him in the head and take a gun out of his pocket, leaving him to die.
  ~ has_guards_gun = true
@@ -107,7 +119,7 @@ Wait, you really want to help him? After what you did, really? Come on, there's 
 == open_bay_doors ==
 \.\.\.\.\.\.\.\.\.\.
 You make it to the hangar bay doors. The doors are six meters tall and would normally be powered by an internal mechanism.
-
+# IMAGE_5
 Hitting the "open" button doesn't seem to do anything. The doors don't have any power. 
 
 { 
@@ -145,7 +157,7 @@ Hitting the "open" button doesn't seem to do anything. The doors don't have any 
 
 == look_for_crowbar ==
 While looking for something to wedge open the door, you come across the prison bay. You see a few high-security cells near the back, still running on backup power.
-
+# IMAGE_4
 You notice one of the prisoners inside holding a crowbar and prying open the cell door. They're about to escape when they notice you.
 
 ~back_from_key_search = true
@@ -189,7 +201,7 @@ After all, you two aren't so different... Especially after what you did.
 
 == obtain_escape_pod ==
 You finally enter the hangar bay. Parts of the ceiling are breaking apart, and several shuttles have been crushed by falling debris. Most of the remaining shuttles seem to have already been taken.
-
+# IMAGE_6
 You notice one seemingly intact shuttle near the exit doors of the hangar bay and rush towards it, carefully avoiding the debris.
 # EMPTY_LINE
 You suddenly hear something fly through the open hangar doors and crash into the shuttle. It's a dropship!
@@ -219,9 +231,9 @@ The Burger Brigade ate you alive... Try again?
 
 == try_to_escape ==
 Fortunately, you notice a row of escape pod bays on the side of the hangar and make your way towards it.
-
+# IMAGE_6
 There's only a few functional escape pods left. You enter, and the systems initialize. It looks like these escape pods don't have an autopilot... and there's only enough fuel to reach the nearest planet.
-
+# IMAGE_7
 You buckle in the pilot seat and slam the eject button.
 {
  - (with_guard == false && with_prisoner == false):

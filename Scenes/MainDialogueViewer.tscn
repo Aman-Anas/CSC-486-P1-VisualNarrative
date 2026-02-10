@@ -3,6 +3,13 @@
 [ext_resource type="PackedScene" uid="uid://bvxrfon87fmf2" path="res://Scenes/Dialogue/test_ink_dialogue.tscn" id="1_b5b44"]
 [ext_resource type="Texture2D" uid="uid://b6ypttt14sw7v" path="res://addons/kenney_prototype_textures/dark/texture_08.png" id="1_i6x60"]
 [ext_resource type="PackedScene" uid="uid://be68kkhnkgb6u" path="res://Scenes/Pause_Menu/Pause.tscn" id="3_8yqo2"]
+[ext_resource type="Texture2D" uid="uid://bte1k6slgcbaj" path="res://images/1. cell block.png" id="3_gxbsc"]
+[ext_resource type="Texture2D" uid="uid://644kgr77df4x" path="res://images/2. wirehallway.png" id="4_tk4wb"]
+[ext_resource type="Texture2D" uid="uid://clcgnmxs7rl4i" path="res://images/3. guard in door.png" id="5_i8ykc"]
+[ext_resource type="Texture2D" uid="uid://ncn0i47tmg82" path="res://images/4. prisonerhallway.png" id="6_lned8"]
+[ext_resource type="Texture2D" uid="uid://3v3pumqi8gnr" path="res://images/5. hangardoor.png" id="7_1qcvb"]
+[ext_resource type="Texture2D" uid="uid://m8twllhmrbv2" path="res://images/6. hangar.png" id="8_l2dca"]
+[ext_resource type="Texture2D" uid="uid://jope121p1dwv" path="res://images/7. ship.png" id="9_gxlqi"]
 
 [node name="ColorRect" type="ColorRect" unique_id=1025871647]
 anchors_preset = 15
@@ -44,10 +51,12 @@ theme_override_constants/margin_bottom = 12
 [node name="ScrollContainer" type="ScrollContainer" parent="MainDialogueViewer/HBoxContainer/MarginContainer" unique_id=543801680]
 layout_mode = 2
 
-[node name="TestInkDialogue" parent="MainDialogueViewer/HBoxContainer/MarginContainer/ScrollContainer" unique_id=1295431285 node_paths=PackedStringArray("fastForward") instance=ExtResource("1_b5b44")]
+[node name="TestInkDialogue" parent="MainDialogueViewer/HBoxContainer/MarginContainer/ScrollContainer" unique_id=1295431285 node_paths=PackedStringArray("fastForward", "imageViewer") instance=ExtResource("1_b5b44")]
 layout_mode = 2
 size_flags_horizontal = 3
 fastForward = NodePath("../../../../../Button")
+imageViewer = NodePath("../../../TextureRect")
+imageList = Array[Texture2D]([ExtResource("1_i6x60"), ExtResource("3_gxbsc"), ExtResource("4_tk4wb"), ExtResource("5_i8ykc"), ExtResource("6_lned8"), ExtResource("7_1qcvb"), ExtResource("8_l2dca"), ExtResource("9_gxlqi")])
 
 [node name="Button" type="Button" parent="." unique_id=1903701262]
 layout_mode = 1
