@@ -15,32 +15,46 @@ Would you like to skip the introduction?
   -> exposition
 
 == exposition ==
-You used to be someone important, or at least you told yourself that. You weren’t exactly cruel, you just believed rules were for people who needed them. Other people waited in lines. Other people paid the price when things went wrong.
+= expo_1
+You used to be someone important, or at least you told yourself that. You didn't think you were cruel, you just believed rules were for people who needed them. Other people waited in lines. Other people paid the price when things went wrong.
+# EMPTY_LINE
+When the Burger Consortium expanded into your sector, you didn’t see them as invaders, you saw an opportunity. You made contracts and cut corners. Some raised complaints, but they were silenced with money or a well-timed disappearance. You reassured yourself it was just business. No one was really getting hurt. But someone did get hurt. A lot of someones, you think.
 
-When the Burger Consortium expanded into your sector, you didn’t see invaders, you saw opportunity. You made contracts, you cut corners. A few complaints were silenced with money or a well-timed disappearance. You reassured yourself it was just business. You said no one was really getting hurt. But someone did get hurt. A lot of someones, you think.
++ [...]
+  -> exposition.expo_2
 
-You don't remember the trial. Just the sentence: space prison. It sounded absurd at the time, like a joke taken too far. You laughed, all the way up until the cuffs locked and the stars started moving the wrong way.
-
-Now, you're here. Stripped of comfort and status, you are reduced to a body with needs: hunger, fear, and survival. But omewhere deep inside, beneath the outrage and denial, something is stirring. A thought you don’t like: "If this is who you really are... why pretend otherwise?"
+= expo_2
+You don't remember the trial. Just your sentence: space prison. It sounded absurd at the time. You laughed, all the way up until the cuffs locked and the stars started moving the wrong way.
+# EMPTY_LINE
+Now, you're here. Stripped of your comfort and status, you are reduced to a body with needs: hunger, fear, and survival. But omewhere deep inside, beneath the outrage and denial, something is stirring. A thought you don’t like: "If this is who you really are... why pretend otherwise?"
 
 + [Begin your adventure]
   -> begin
 
 
 == begin ==
+= begin_1
 You wake up in a cramped prison cell, the kind designed for corpses, not people. Your head is pounding. Not in a dramatic way, more like the dull ache of a bad decision from a previous you refuse to replay. You remember your name. You remember signing... contracts. You remember being important.
-
++ [...]
+ -> begin.begin_2
+= begin_2
 You don't remember doing anything that deserves treament like this. Bright lights buzz overhead. The air smells faintly of ozone... and cheese? Like limburger, but worse. So much worse. Whoever runs this place clearly has no standards.
++ [...]
+ -> begin.begin_3
 
+= begin_3
 You try to reconstruct the last few hours. A corporate boardroom? People yelling... someone saying, "We can make this work." Then movement. Restraints. Stars sliding sideways across a narrow porthole. After that, nothing you’re willing to claim.
-
++ [...]
+ -> begin.begin_4
+= begin_4
 An alien... guard waddles past your cell, carrying a tray of green slime. They stop and slide it through the slot in your cell door, vaguely gesturing toward it before moving on to the next cell.
-
+# EMPTY_LINE
 The slime quivers a bit. You're not sure if you trust it. This is prison food, sustenance stripped of all dignity. You'd much prefer a gourmet meal by the Lamb Sauce Oracle.
-
+# EMPTY_LINE
 You feel a familiar irritation rise up, one that strikes offense, as if the universe has made a serious error. You were never meant to be on this side of the transaction.
 
 + [This is too disgusting, refuse] You slide the tray away with your foot. Whatever this is, it's meant to keep prisoners barely functional, not human. Your stomach groans in protest, but you ignore it. Hunger is temporary, your dignity is not.
+# EMPTY_LINE
  ~ ate_food = false
  -> stay_or_leave
 + [Eat it, you're hungry] You hesitate, then scoop up the quivering mass and force it down. It tastes like nothing you’d ever pay for, but warmth spreads through your body almost immediately. Your muscles loosen and your head clears. You hate how much better you feel. "You feel energized!"
@@ -49,7 +63,7 @@ You feel a familiar irritation rise up, one that strikes offense, as if the univ
 
 == stay_or_leave ==
 Suddenly, the lights flicker in the cell. The entire building shakes several times, and then the lights turn off. The light on the door locks fade away, you might be able to force the door open now.
-
+# EMPTY_LINE
 Do you stay in the cell block?
 
 + [Stay in the cell block] The cell shakes and you hear a hissing. 
