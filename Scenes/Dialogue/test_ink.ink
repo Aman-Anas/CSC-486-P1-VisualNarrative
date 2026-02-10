@@ -26,7 +26,7 @@ When the Burger Consortium expanded into your sector, you didn’t see them as i
 = expo_2
 You don't remember the trial. Just your sentence: space prison. It sounded absurd at the time. You laughed, all the way up until the cuffs locked and the stars started moving the wrong way.
 # EMPTY_LINE
-Now, you're here. Stripped of your comfort and status, you are reduced to a body with needs: hunger, fear, and survival. But omewhere deep inside, beneath the outrage and denial, something is stirring. A thought you don’t like: "If this is who you really are... why pretend otherwise?"
+Now, you're here. Stripped of your comfort and status, you are reduced to a body with needs: hunger, fear, and survival. But somewhere deep inside, beneath the outrage and denial, something is stirring. A thought you don’t like: "If this is who you really are... why pretend otherwise?"
 
 + [Begin your adventure]
   -> begin
@@ -80,7 +80,7 @@ Following the signs mounted on the wall, you make your way to the hangar. You he
 
 What do you do?
 
-+ [Help the guard] You help the guard out of the door. His name is Bob, and he's heading to the hangar too. He agrees to help you out, and you head towards the hangar together.
++ [Help the guard] You begin helping the guard.
 
  -> evil_whisper
 + [Knock him out and take his gun] You kick him in the head and take a gun out of his pocket, leaving him to die.
