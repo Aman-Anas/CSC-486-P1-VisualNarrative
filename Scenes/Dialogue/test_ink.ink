@@ -1,38 +1,54 @@
-Begin your adventure?
-
 VAR ate_food = false
-
 VAR with_guard = false
-
 VAR with_prisoner = false
-
 VAR has_guards_gun = false
-
 VAR is_alone = true
-
 VAR back_from_key_search = false
-
 VAR ate_the_guard = false
+VAR num_evil_choices = 0
+
+Would you like to skip the introduction?
 
 + [Yes]
   -> begin
++ [No]
+  -> exposition
+
+== exposition ==
+You used to be someone important, or at least you told yourself that. You weren’t exactly cruel, you just believed rules were for people who needed them. Other people waited in lines. Other people paid the price when things went wrong.
+
+When the Burger Consortium expanded into your sector, you didn’t see invaders, you saw opportunity. You made contracts, you cut corners. A few complaints were silenced with money or a well-timed disappearance. You reassured yourself it was just business. You said no one was really getting hurt. But someone did get hurt. A lot of someones, you think.
+
+You don't remember the trial. Just the sentence: space prison. It sounded absurd at the time, like a joke taken too far. You laughed, all the way up until the cuffs locked and the stars started moving the wrong way.
+
+Now, you're here. Stripped of comfort and status, you are reduced to a body with needs: hunger, fear, and survival. But omewhere deep inside, beneath the outrage and denial, something is stirring. A thought you don’t like: "If this is who you really are... why pretend otherwise?"
+
++ [Begin your adventure]
+  -> begin
+
 
 == begin ==
-You wake up in a 5x5-foot prison cell. Bright lights stream from the ceiling, and the cell smells like cheese. You vaguely remember running away from something before you woke up... and nothing before that.
+You wake up in a cramped prison cell, the kind designed for corpses, not people. Your head is pounding. Not in a dramatic way, more like the dull ache of a bad decision from a previous you refuse to replay. You remember your name. You remember signing... contracts. You remember being important.
 
-An alien... guard walks by your cell, carrying a tray of green slime. They place it in front of you and gesture vaguely towards it before walking away.
+You don't remember doing anything that deserves treament like this. Bright lights buzz overhead. The air smells faintly of ozone... and cheese? Like limburger, but worse. So much worse. Whoever runs this place clearly has no standards.
 
-The slime twitches a few times. You're not sure if you trust it, and you want to eat a gourmet meal instead.
+You try to reconstruct the last few hours. A corporate boardroom? People yelling... someone saying, "We can make this work." Then movement. Restraints. Stars sliding sideways across a narrow porthole. After that, nothing you’re willing to claim.
 
-+ [This is too disgusting, refuse] You refuse the prison food. Your stomach rumbles, but you don't want to eat food for poor people.
- ~ate_food = false
+An alien... guard waddles past your cell, carrying a tray of green slime. They stop and slide it through the slot in your cell door, vaguely gesturing toward it before moving on to the next cell.
+
+The slime quivers a bit. You're not sure if you trust it. This is prison food, sustenance stripped of all dignity. You'd much prefer a gourmet meal by the Lamb Sauce Oracle.
+
+You feel a familiar irritation rise up, one that strikes offense, as if the universe has made a serious error. You were never meant to be on this side of the transaction.
+
++ [This is too disgusting, refuse] You slide the tray away with your foot. Whatever this is, it's meant to keep prisoners barely functional, not human. Your stomach groans in protest, but you ignore it. Hunger is temporary, your dignity is not.
+ ~ ate_food = false
  -> stay_or_leave
-+ [Eat it, you're hungry] You crunch through the slime and eat the meal. You feel energized!
- ~ate_food = true
++ [Eat it, you're hungry] You hesitate, then scoop up the quivering mass and force it down. It tastes like nothing you’d ever pay for, but warmth spreads through your body almost immediately. Your muscles loosen and your head clears. You hate how much better you feel. "You feel energized!"
+ ~ ate_food = true
  -> stay_or_leave
 
 == stay_or_leave ==
-Suddenly, the lights flicker in the cell. The entire building shakes several times, and then the lights turn off. The light on the door locks fade away. You think you might be able to force the door open now.
+Suddenly, the lights flicker in the cell. The entire building shakes several times, and then the lights turn off. The light on the door locks fade away, you might be able to force the door open now.
 
 Do you stay in the cell block?
 
@@ -44,21 +60,35 @@ You died.
  -> go_to_hangar
 
 == go_to_hangar ==
-You look out the window. It looks like you're on a space station! The only way out is to get on a shuttle. You think you can find one in the hangar bay.
+You look out the window. It looks like you're on a space station! Orbiting the planet... uh, you're not sure what this planet is called. The only way out of here is to get on a shuttle. You think you can find one in the hangar bay.
 
 Following the signs mounted on the wall, you make your way to the hangar. You hear screaming from a corridor to the left. Glancing that way, you notice a guard with his leg stuck in a door.
 
 What do you do?
 
 + [Help the guard] You help the guard out of the door. His name is Bob, and he's heading to the hangar too. He agrees to help you out, and you head towards the hangar together.
- ~ with_guard = true
- ~ is_alone = false
- -> open_bay_doors
+
+ -> evil_whisper
 + [Knock him out and take his gun] You kick him in the head and take a gun out of his pocket, leaving him to die.
  ~ has_guards_gun = true
  -> open_bay_doors
 + [Leave them alone] You ignore him and walk away.
  -> open_bay_doors
+
+== evil_whisper ==
+Wait, you really want to help him? After what you did, really? Come on, there's no changing now...
+
++ [Continue and help the guard] You help the guard out of the door. His name is Bob, and he's heading to the hangar too. He agrees to help you out, and you head towards the hangar together.
+ ~ with_guard = true
+ ~ is_alone = false
+ -> open_bay_doors
++ [Knock him out and take his gun] You kick him in the head and take a gun out of his pocket, leaving him to die.
+ ~ has_guards_gun = true
+ ~ num_evil_choices = num_evil_choices + 1
+ -> open_bay_doors
++ [Leave them alone] You ignore him and walk away.
+ -> open_bay_doors
+
 
 == open_bay_doors ==
 \.\.\.\.\.\.\.\.\.\.
@@ -78,10 +108,10 @@ Hitting the "open" button doesn't seem to do anything. The doors don't have any 
 
 { 
  - with_guard == true:
-    + [Throw the guard at the door] You pick up Bob and yeet him towards the door, hoping to pry it open somehow.
+    + [Save yourself... and throw the guard at the door] You pick up Bob and yeet him towards the door, hoping to pry it open somehow.
     Bob: "What?!? Come here ya little..."
     Bob is enraged and beats you to death with his baton, before throwing you out an airlock.
-    You died... Restart?
+     Some people never change... Try again?
       -> prompt_restart
 
  }
@@ -91,9 +121,10 @@ Hitting the "open" button doesn't seem to do anything. The doors don't have any 
 
 { 
  - back_from_key_search == true && with_guard == true:
-    + [Eat the guard for energy] You devour the guard and gain enough energy to pry open the door.
-     ~with_guard = false
-	~ate_food = true
+    + There's no changing your ways... [eat the guard for energy] You devour the guard and gain enough strength to pry open the door.
+     ~ with_guard = false
+	~ ate_food = true
+     ~ num_evil_choices = num_evil_choices + 1
      -> open_bay_doors
 
  }
@@ -113,7 +144,7 @@ The prisoner notices Bob standing next to you.
       -> open_bay_doors
 
 - else:
-	"You want me to help you? Sure.. In fact, let me give you a little gift - here's some cybernetic body armor. Put it on!"
+	"You want me to help you? Sure. In fact, let me give you a little gift - here's some cybernetic body armor. Put it on!"
 + [Accept the body modification]
  ~with_prisoner = true
  -> obtain_escape_pod
@@ -122,7 +153,24 @@ The prisoner notices Bob standing next to you.
 + [Shoot the prisoner and take the crowbar] You shoot the prisoner in cold blood and take the crowbar from his dead hands.
  -> obtain_escape_pod
 	}
+	+ [Reject the body modification and leave by yourself]
+ -> evil_whisper_with_prisoner
 }
+
+== evil_whisper_with_prisoner ==
+Wait, why shouldn't you go with him, he can be of some help. 
+After all, you two aren't so different... Especially after what you did.
++ [Accept the body modification]
+ ~with_prisoner = true
+ -> obtain_escape_pod
+{
+ - has_guards_gun == true:
++ [Shoot the prisoner and take the crowbar] You shoot the prisoner in cold blood and take the crowbar from his dead hands.
+ ~ num_evil_choices = num_evil_choices + 1
+ -> obtain_escape_pod
+	}
+	+ [Continue by yourself]
+ -> obtain_escape_pod
 
 
 == obtain_escape_pod ==
@@ -138,10 +186,10 @@ You are being jumped by a burger brigade! Ducking behind some crates to avoid th
 {
  - has_guards_gun == true:
   + [Shoot the burgers]
-	Using your gun, you carefully pick off the burgers one by one from behind cover. Finally, the last burger falls.  Fortunately these were only discount burgers.
+	Coming to a decision, you use your gun. Firing at the nearest burger, you see meat and condiments burst out the other side of the alien. You feel something within you change... You carefully pick off the burgers one by one from behind cover. Finally, the last burger falls.  Fortunately they were only discount burgers.
    -> try_to_escape
  - with_guard == true:
-  Bob: Get behind me! *Fires gun*
+  Bob: "Get behind me!" *Fires gun*
 	Bob masterfully dodges cheesefire while firing back at the burger brigade. Within 20 seconds, he single-handedly disarms and dismembers the entire squadron.
 # EMPTY_LINE
 You remind yourself not to get on his bad side in the future.
@@ -163,12 +211,12 @@ There's only a few functional escape pods left. You enter, and the systems initi
 You buckle in the pilot seat and slam the eject button.
 {
  - (with_guard == false && with_prisoner == false):
-  Wait, how do I steer?!? AHHHHHHHHHHHHHHHHHHHHH!
+  Wait, how do I steer?!? AHHHHH!
   + A pathetic death, even for a criminal... Try again? 
    -> prompt_restart
 
  - with_guard == true:
-  Bob: "I got this, I've taken a pilot training course before. Buckle up for a bumpy ride!"
+  Bob: "I've got this, I took a pilot training course back in the academy. Buckle up, it's going to be a bumpy ride!"
 
 Bob grabs the wheel and carefully pilots the pod towards the planet.
 # EMPTY_LINE
@@ -177,10 +225,10 @@ Bob grabs the wheel and carefully pilots the pod towards the planet.
 -> prompt_restart
 
  - with_prisoner == true:
-  Prisoner: *chuckles* Now that I'm free... did you know? Those 'enhancements' I gave you were a little.. modified.
+  Prisoner: *chuckles* "Now that I'm free... did you know? Those 'enhancements' I gave you were a little.. modified."
 # EMPTY_LINE
   \*The prisoner presses a button on his wrist, and you feel a shock. You're paralyzed!\*
-  Prisoner: I have no need for dead weight. Have a nice trip!
+  Prisoner: "I have no need for dead weight. Have a nice trip!"
 The prisoner throws you out of the hangar bay, and takes the escape pod for himself.
 # EMPTY_LINE
 Birds of a feather flock together... Try again?
