@@ -132,28 +132,20 @@ Hitting the "open" button doesn't seem to do anything. The doors don't have any 
 
  }
 
-{ 
- - with_guard == true:
-    + [Save yourself... and throw the guard at the door] You pick up Bob and yeet him towards the door, hoping to pry it open somehow.
-    Bob: "What?!? Come here ya little..."
-    Bob is enraged and beats you to death with his baton, before throwing you out an airlock.
-     Some people never change... Try again?
-      -> prompt_restart
-
- }
++ {with_guard == true} [Save yourself... and throw the guard at the door] You pick up Bob and yeet him towards the door, hoping to pry it open somehow.
+Bob: "What?!? Come here ya little..."
+Bob is enraged and beats you to death with his baton, before throwing you out an airlock.
+ Some people never change... Try again?
+  -> prompt_restart
 
 + [Look for a crowbar]
  -> look_for_crowbar
-
-{ 
- - back_from_key_search == true && with_guard == true:
-    + There's no changing your ways... [eat the guard for energy] You devour the guard and gain enough strength to pry open the door.
-     ~ with_guard = false
-	~ ate_food = true
-     ~ num_evil_choices = num_evil_choices + 1
-     -> open_bay_doors
-
- }
+ 
++ { back_from_key_search == true && with_guard == true } There's no changing your ways... [eat the guard for energy] You devour the guard and gain enough strength to pry open the door.
+    ~ with_guard = false
+    ~ ate_food = true
+    ~ num_evil_choices = num_evil_choices + 1
+    -> obtain_escape_pod
 
 == look_for_crowbar ==
 While looking for something to wedge open the door, you come across the prison bay. You see a few high-security cells near the back, still running on backup power.
@@ -164,38 +156,37 @@ You notice one of the prisoners inside holding a crowbar and prying open the cel
 
 {
  - with_guard == true:
-The prisoner notices Bob standing next to you.  
-"Crowbar's mine! Get outta here, you filthy coppah!"
-    + [Return to the hangar bay]
-      -> open_bay_doors
+  The prisoner notices Bob standing next to you.  
+  "Crowbar's mine! Get outta here, you filthy coppah!"
+  + [Return to the hangar bay]
+    -> open_bay_doors
 
 - else:
 	"You want me to help you? Sure. In fact, let me give you a little gift - here's some cybernetic body armor. Put it on!"
-+ [Accept the body modification]
- ~with_prisoner = true
- -> obtain_escape_pod
-{
- - has_guards_gun == true:
-+ [Shoot the prisoner and take the crowbar] You shoot the prisoner in cold blood and take the crowbar from his dead hands.
- -> obtain_escape_pod
-	}
-	+ [Reject the body modification and leave by yourself]
- -> evil_whisper_with_prisoner
+  + [Accept the body modification]
+   ~with_prisoner = true
+   -> obtain_escape_pod
+
+  + { has_guards_gun == true} [Shoot the prisoner and take the crowbar] You shoot the prisoner in cold blood and take the crowbar from his dead hands.
+   ~ num_evil_choices = num_evil_choices + 1
+   -> obtain_escape_pod
+
+  + [Reject the body modification and leave by yourself]
+   -> evil_whisper_with_prisoner
 }
 
 == evil_whisper_with_prisoner ==
 Wait, why shouldn't you go with him, he can be of some help. 
 After all, you two aren't so different... Especially after what you did.
 + [Accept the body modification]
- ~with_prisoner = true
- -> obtain_escape_pod
-{
- - has_guards_gun == true:
-+ [Shoot the prisoner and take the crowbar] You shoot the prisoner in cold blood and take the crowbar from his dead hands.
- ~ num_evil_choices = num_evil_choices + 1
- -> obtain_escape_pod
-	}
-	+ [Continue by yourself]
+  ~with_prisoner = true
+  -> obtain_escape_pod
+
++ { has_guards_gun == true } [Shoot the prisoner and take the crowbar] You shoot the prisoner in cold blood and take the crowbar from his dead hands.
+  ~ num_evil_choices = num_evil_choices + 1
+  -> obtain_escape_pod
+
++ [Continue by yourself]
  -> obtain_escape_pod
 
 

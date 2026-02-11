@@ -22,8 +22,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-DebugMenu="*uid://cggqb75a8w8r"
 InputHelper="*uid://cholww48njaeh"
+DebugMenu="*uid://cggqb75a8w8r"
 Manager="*uid://d20qpjy4hol6k"
 
 [dialogue_manager]
@@ -65,3 +65,7 @@ pause_game={
 [internationalization]
 
 locale/translations_pot_files=PackedStringArray("res://Dialogue/Test_dialog.dialogue")
+
+[rendering]
+
+textures/vram_compression/import_etc2_astc=true
